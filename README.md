@@ -1,3 +1,6 @@
+* `make` : runs the talk
+
+* `print` : prints the slides
 
 * `make run-basics`
 
