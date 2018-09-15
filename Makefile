@@ -2,6 +2,9 @@
 run:
 	slideshow the-talk.rkt
 
+run-wide:
+	slideshow -M 1 --widescreen the-talk.rkt
+
 print:
 	slideshow --pdf the-talk.rkt
 
@@ -14,3 +17,4 @@ print-basics:
 clean:
 	rm -rf *~
 	rm -rf slideshow-basics.pdf the-talk.pdf
+	rm -rf compiled/
