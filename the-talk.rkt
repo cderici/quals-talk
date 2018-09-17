@@ -14,7 +14,7 @@
   (let ([w (+ (* 2 margin) client-w)]
         [h (+ (* 2 margin) client-h)]
         [trans (make-object brush% "white" 'transparent)]
-        [inside (make-object brush% "white" 'solid)])
+        [inside (make-object brush% (make-object color% 120 153 169) 'solid)])
     (inset (dc (lambda (dc x y)
                  (let ([b (send dc get-brush)]
                        [p (send dc get-pen)]
@@ -27,7 +27,7 @@
                    (color-series 
                     dc margin 1
                     (make-object color% "black")
-                    (make-object color% "white")
+                    (make-object color% (make-object color% 120 153 169))
                     draw-one
                     #t #t)
                    (send dc set-brush inside)
@@ -42,7 +42,8 @@
    (lt-superimpose
     (lbl-superimpose
      fade-bg
-     (hc-append (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
+     (hc-append gap-size
+                (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
                 (scale (bitmap (build-path "images" "isabelle.png")) 0.3)
                 (scale (bitmap (build-path "images" "pycket.png")) 0.3)))
     (let ([c (colorize c "darkred")])
@@ -206,6 +207,25 @@
     (scale (bitmap (build-path "images" "chez.png")) 0.7)
     (scale (bitmap (build-path "images" "racket-on-chez.png")) 0.7))
   )
+
+(slide
+  #:title "Linklets and Instantiation"
+  (scale (bitmap (build-path "images" "linklet-grammar.png")) 1)
+  (item #:bullet (colorize (tt ">") "darkred")
+        (t "Linklets contain Racket Core expressions."))
+  (item #:bullet (colorize (tt ">") "darkred")
+        (t "A linklet instance is a collection of variable definitions."))
+  'alts
+  (list (list (scale (bitmap (build-path "images" "linklet-example.png")) 0.8))
+        (list (scale (bitmap (build-path "images" "inst-example.png")) 0.8)
+              (para #:align 'center
+                    (t "Instantiating the linklet will result in a ")
+                    (tt "linklet instance")))))
+
+(slide
+  #:title "Evaluating a Linklet (i.e. Targeted Instantiation)"
+  (scale (bitmap (build-path "images" "eval-example.png")) 1.2)
+  (t "If a target is provided, then an instantiation produces a value."))
 
 (outline 'two)
 
