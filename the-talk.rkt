@@ -159,7 +159,7 @@
           (vc-append v-sep
                      ;; left-aligns the title:
                      #;(ghost (scale (titlet s) 2))
-                     (titlet s)
+                     (inset (titlet s) 20)
                      c)
           c))
       )))
@@ -226,6 +226,32 @@
   #:title "Evaluating a Linklet (i.e. Targeted Instantiation)"
   (scale (bitmap (build-path "images" "eval-example.png")) 1.2)
   (t "If a target is provided, then an instantiation produces a value."))
+
+(slide
+  #:title "Building the PLT Redex Model for Linklets"
+  (item #:bullet (colorize (tt ">") "darkred")
+         (t "Racket Core Model"))
+  (item #:bullet (colorize (tt ">") "darkred")
+         (t "Linklet Model"))
+  )
+
+(slide
+  #:title "Racket Core (RC) Model"
+  (scale (bitmap (build-path "images" "rc-grammar.png")) 0.8)
+  (para #:align 'center "Racket Core Model Grammar")
+  )
+
+(slide
+  #:title "Racket Core (RC) Model"
+  (scale (bitmap (build-path "images" "rc-red-relation.png")) 0.6)
+  (para #:align 'center "Racket Core Model Standard Reduction Relation")
+  )
+
+(slide
+  #:title "Racket Core (RC) Model"
+  (scale (bitmap (build-path "images" "rc-run-rc.png")) 0.8)
+  (para #:align 'center "Racket Core Model Evaluation Function")
+  )
 
 (outline 'two)
 
