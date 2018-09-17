@@ -87,26 +87,91 @@
 
 (set-page-numbers-visible! #f)
 
- (slide
-  #:title "Qualifying Examination Response"
-  (scale (t "Caner Derici") 0.8)
-  (scale (t "19 Sep 2018") 0.5)
-  (blank)
-  (scale (it "Advisor:") 0.5)
-  (scale (it "Sam Tobin-Hochstadt") 0.5)
-  )
+(slide
+ #:title "Qualifying Examination"
+ (scale (t "Caner Derici") 0.8)
+ (scale (t "19 Sep 2018") 0.5)
+ (blank)
+ (scale (it "Advisor:") 0.5)
+ (scale (it "Sam Tobin-Hochstadt") 0.5)
+ )
 
 #;(start-at-recent-slide)
 
 #;(set-page-numbers-visible! #t)
 
+(current-font-size 25)
+
+(current-slide-assembler
+ (lambda (s v-sep c)
+   (lt-superimpose
+    fade-bg
+    (let ([c (colorize c "darkred")])
+      (if s
+          (vc-append v-sep 
+                     ;; left-aligns the title:
+                     (ghost (scale (titlet s) 2))
+                     (titlet s)
+                     c)
+          c))
+      )))
+
+(slide
+ #:title "Questions"
+ (table 2 ; two columns
+        (list
+         (item #:bullet (colorize (tt ">") "darkred")
+               (para #:width 1000
+                     (it "Model the basics of the new Racket \"linklet\" module system using PLT Redex.")
+                     (it "Use random testing to confirm that the model produces the same answers as")
+                     (it "both the existing implementation and the implementation that you have produced")
+                     (it "using the Pycket JIT.")))
+         (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
+         (item #:bullet (colorize (tt ">") "darkred")
+               (para #:width 1000
+                     (it "Extend Jeremy’s denotational model of the untyped lambda calculus with pairs.")
+                     (it "Extend the proof of correspondence with the operational semantics in Isabelle")
+                     (it "to handle pairs.")))
+         (scale (bitmap (build-path "images" "isabelle.png")) 0.3)
+         (item #:bullet (colorize (tt ">") "darkred")
+               (para #:width 1000
+                     (it "Measure the performance of your changes to the Pycket JIT on the existing")
+                     (it "benchmarks. For at least 3 performance differences, propose a hypothesis")
+                     (it "that explains the difference.")))
+         (scale (bitmap (build-path "images" "pycket.png")) 0.3))
+         (list* lc-superimpose  ; left-align first column
+                cc-superimpose) ; h-center the rest
+         cc-superimpose ; v-center all rows
+         gap-size  ; separate all columns by gap-size
+         gap-size)) ; separate all rows by gap-size
+
 (outline 'one)
 
+(current-slide-assembler
+ (lambda (s v-sep c)
+   (lt-superimpose
+    (lbl-superimpose
+     fade-bg
+     (scale (bitmap (build-path "images" "plt-logo.png")) 0.3))
+    (let ([c (colorize c "darkred")])
+      (if s
+          (vc-append v-sep 
+                     ;; left-aligns the title:
+                     (ghost (scale (titlet s) 2))
+                     (titlet s)
+                     c)
+          c))
+      )))
 
 
  (slide
-  #:title "Linklets"
-  (t "linklets")
+  #:title "What is a linklet?"
+  (scale (bitmap (build-path "images" "linklet-grammar.png")) 1.2)
+  )
+
+ (slide
+  #:title "Motivation for linklet"
+  (t "Grammar image")
   )
 
 (outline 'two)
