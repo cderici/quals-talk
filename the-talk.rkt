@@ -253,6 +253,23 @@
   (para #:align 'center "Racket Core Model Evaluation Function")
   )
 
+(slide
+  #:title "Linklet Model"
+  (scale (bitmap (build-path "images" "linklet-model-grammar.png")) 0.6)
+  (para #:align 'center "Linklet Model Grammar")
+  )
+
+(slide
+  #:title "Linklet Model"
+  'alts
+  (list (list 
+         (scale (bitmap (build-path "images" "linklet-red-relation.png")) 0.6)
+         (para #:align 'center "Linklet Model Standard Reduction Relation"))
+        (list
+         (scale (bitmap (build-path "images" "linklet-red-relation-focus.png")) 0.6)
+         (para #:align 'center "Linklet Model Standard Reduction Relation"))))
+
+
 (outline 'two)
 
 (outline 'three)
