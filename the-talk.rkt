@@ -155,9 +155,9 @@
      (scale (bitmap (build-path "images" "plt-logo.png")) 0.3))
     (let ([c (colorize c "darkred")])
       (if s
-          (vc-append v-sep 
+          (vc-append v-sep
                      ;; left-aligns the title:
-                     (ghost (scale (titlet s) 2))
+                     #;(ghost (scale (titlet s) 2))
                      (titlet s)
                      c)
           c))
@@ -170,8 +170,41 @@
   )
 
  (slide
-  #:title "Motivation for linklet"
-  (t "Grammar image")
+  #:title "Motivation for linklets"
+   (item #:bullet (colorize (tt ">") "darkred")
+         (t "Implementing Racket in Racket"))
+   'next
+   (item #:bullet (colorize (tt ">") "darkred")
+         (t "Racket on Chez"))
+  )
+
+ (slide
+  #:title "Racket on Chez"
+  (scale (bitmap (build-path "images" "racket6core.png")) 0.7)
+  )
+
+(slide
+  #:title "Racket on Chez"
+  (hc-append (* gap-size 2)
+    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)    
+    (scale (bitmap (build-path "images" "racket7core.png")) 0.7))
+  )
+
+(slide
+  #:title "Racket on Chez"
+  (hc-append (* gap-size 2)
+    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)    
+    (scale (bitmap (build-path "images" "racket7core.png")) 0.7)
+    (scale (bitmap (build-path "images" "chez.png")) 0.7))
+  )
+   
+(slide
+  #:title "Racket on Chez"
+  (hc-append (* gap-size 2)
+    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)    
+    (scale (bitmap (build-path "images" "racket7core.png")) 0.7)
+    (scale (bitmap (build-path "images" "chez.png")) 0.7)
+    (scale (bitmap (build-path "images" "racket-on-chez.png")) 0.7))
   )
 
 (outline 'two)
