@@ -27,7 +27,7 @@
                                 (+ x i) (+ y i)
                                 (- w (* 2 i)) (- h (* 2 i))))])
                    (send dc set-brush trans)
-                   (color-series 
+                   (color-series
                     dc margin 1
                     (make-object color% "black")
                     (make-object color% (make-object color% 120 153 169))
@@ -51,7 +51,7 @@
                 (scale (bitmap (build-path "images" "pycket.png")) 0.3)))
     (let ([c (colorize c "darkred")])
       (if s
-          (vc-append v-sep 
+          (vc-append v-sep
                      ;; left-aligns the title:
                      (ghost (scale (titlet s) 2))
                      (titlet s)
@@ -113,7 +113,7 @@
     fade-bg
     (let ([c (colorize c "darkred")])
       (if s
-          (vc-append v-sep 
+          (vc-append v-sep
                      ;; left-aligns the title:
                      (ghost (scale (titlet s) 2))
                      (titlet s)
@@ -192,22 +192,22 @@
 (slide
   #:title "Racket on Chez"
   (hc-append (* gap-size 2)
-    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)    
+    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)
     (scale (bitmap (build-path "images" "racket7core.png")) 0.7))
   )
 
 (slide
   #:title "Racket on Chez"
   (hc-append (* gap-size 2)
-    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)    
+    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)
     (scale (bitmap (build-path "images" "racket7core.png")) 0.7)
     (scale (bitmap (build-path "images" "chez.png")) 0.7))
   )
-   
+
 (slide
   #:title "Racket on Chez"
   (hc-append (* gap-size 2)
-    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)    
+    (scale (bitmap (build-path "images" "racket6core.png")) 0.7)
     (scale (bitmap (build-path "images" "racket7core.png")) 0.7)
     (scale (bitmap (build-path "images" "chez.png")) 0.7)
     (scale (bitmap (build-path "images" "racket-on-chez.png")) 0.7))
@@ -267,7 +267,7 @@
 (slide
   #:title "Linklet Model"
   'alts
-  (list (list 
+  (list (list
          (scale (bitmap (build-path "images" "linklet-red-relation.png")) 0.6)
          (para #:align 'center "Linklet Model Standard Reduction Relation"))
         (list
@@ -332,18 +332,18 @@
  #:title "Testing the Models"
  'alts
  (list
-  (list 
+  (list
    (item #:bullet (colorize (tt ">") "darkred")
          (para (t "Racket Core Model")))
    (item #:bullet (colorize (tt ">") "darkred")
          (para (t "Linklet Model"))))
-  (list 
+  (list
    (item #:bullet (colorize (tt ">") "darkred")
          (para (t "Racket Core Model")))
    (subitem (para "Random testing : " (code eval-rc=racket-core)))
    (item #:bullet (colorize (tt ">") "darkred")
          (para (t "Linklet Model"))))
-  (list 
+  (list
    (item #:bullet (colorize (tt ">") "darkred")
          (para (t "Racket Core Model")))
    (subitem (para "Random testing : " (code eval-rc=racket-core)))
@@ -469,19 +469,27 @@ in its body.")
               (it "Extend the proof of correspondence with the operational semantics in Isabelle")
               (it "to handle pairs."))
         (scale (bitmap (build-path "images" "isabelle" "jeremy-paper.png")) 0.7))
-       (list 
+       (list
         (scale (bitmap (build-path "images" "isabelle" "jeremy-archive.png")) 0.7))
-       (list 
+       (list
         (scale (bitmap (build-path "images" "isabelle" "jeremy-fig4.png")) 1.4))))
 
 (define (isabelle-assembler-file file)
   (lambda (s v-sep c)
     (lt-superimpose
-     (rbl-superimpose
+     (rb-superimpose
       (lbl-superimpose
        fade-bg
        (scale (bitmap (build-path "images" "isabelle.png")) 0.3))
-      (inset (it file) 20)
+      (inset
+       (cc-superimpose
+       (filled-rounded-rectangle (+ (pict-width (it file)) 20)
+                                 (+ (pict-height (it file)) 20)
+                                 #:draw-border? #t
+                                 #:color "Burlywood"
+                                 #:border-color "Bisque"
+                                 #:border-width 5)
+       (it file)) 10))
       (let ([c (colorize c "darkred")])
         (if s
             (vc-append v-sep
@@ -490,7 +498,7 @@ in its body.")
                        (inset (titlet s) 20)
                        c)
             c))
-      ))))
+      )))
 
 (current-slide-assembler (isabelle-assembler-file "Lambda.thy"))
 
@@ -526,6 +534,14 @@ in its body.")
 (slide
  #:title "Extending the Big-Step Operational Semantics"
  (t "Big"))
+
+(current-slide-assembler (isabelle-assembler-file "DeclSemAsDenotFSet.thy"))
+
+(slide
+ #:title "Extending the Denotational Semantics"
+ (t "Fig 16"))
+
+
 
 (outline 'three)
 
