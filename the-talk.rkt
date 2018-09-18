@@ -5,6 +5,7 @@
          slideshow/code
          slideshow/base
          pict
+         pict/face
          racket/draw)
 
 (define slide-count 4) ; 4 outline minus the title
@@ -322,6 +323,67 @@
  (scale (bitmap (build-path "images" "examples-target-5.png")) 1)
  (para #:align 'center "Linklet may use target's variable (e.g. " (code x) ")")
  (para #:align 'center "Instead of the instance, the result of" (code (+ c x)) "is returned"))
+
+(slide
+ #:title "Testing the Models"
+ 'alts
+ (list
+  (list 
+   (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Racket Core Model")))
+   (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Linklet Model"))))
+  (list 
+   (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Racket Core Model")))
+   (subitem (para "Random testing : " (code eval-rc=racket-core)))
+   (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Linklet Model"))))
+  (list 
+   (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Racket Core Model")))
+   (subitem (para "Random testing : " (code eval-rc=racket-core)))
+   (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Linklet Model")))
+   (subitem (para (t "Using Pycket's unit tests for linklets")))
+   (subitem (para "Random testing : " (code eval-prog=racket-linklets))))
+   ))
+
+(slide
+ #:title "Testing the Models : Restricting the Grammars"
+ 'alts
+ (list (list (scale (bitmap (build-path "images" "restricted-rc-grammar.png")) 1)
+             (para #:align 'center "Restricting RC grammar by ruling out closures"))
+       (list (scale (bitmap (build-path "images" "restricted-linklet-grammar.png")) 1)
+             (para #:align 'center "Restricting linklet grammar by ruling out closures")
+             (para #:align 'center "Also the explicit terms for linklet instances"))))
+
+(slide
+ #:title "Testing the Models : The \"program\" Form"
+ (scale (bitmap (build-path "images" "linklet-test-case-1.png")) 1)
+ (para #:align 'center "The " (code (program ...)) " form in action."))
+
+(slide
+ #:title "Testing the Models : To Actual Racket"
+ (scale (bitmap (build-path "images" "to-actual-racket.png")) 1)
+ (para #:align 'center "Transforming the \"program\" into a Racket program."))
+
+(slide
+ #:title "Testing the Models : Perils of Random Testing - Corner Cases"
+ (scale (bitmap (build-path "images" "eval-prog.png")) 0.7)
+ (para #:align 'center "Metafunctions on alert to report corner case errors"))
+
+(slide
+ #:title "Testing the Models : Success!"
+ (item #:bullet (colorize (tt ">") "darkred")
+         (para (t "Racket Core Model")))
+ (subitem (para "Tested " (code eval-rc=racket-core) "with 1000 randomly generated terms"))
+ (item #:bullet (colorize (tt ">") "darkred")
+       (para (t "Linklet Model")))
+ (subitem (para (t "Tested using Pycket's unit tests for linklets (~110 cases)")))
+ (subitem (para "Tested " (code eval-prog=racket-linklets) "with 2000 randomly generated terms"))
+ (para #:align 'right (scale (face* 'normal 'huge #f default-face-color 0 -3) 0.4)))
+
 
 (outline 'two)
 
