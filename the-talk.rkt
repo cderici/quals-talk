@@ -8,6 +8,8 @@
          pict/face
          racket/draw)
 
+(set-spotlight-style! #:size 20 #:color (make-object color% 255 0 0 0.4))
+
 (define slide-count 4) ; 4 outline minus the title
 
 ;; A pict to use behind the main content
@@ -15,7 +17,7 @@
   (let ([w (+ (* 2 margin) client-w)]
         [h (+ (* 2 margin) client-h)]
         [trans (make-object brush% "white" 'transparent)]
-        [inside (make-object brush% (make-object color% 120 153 169) 'solid)])
+        [inside (make-object brush% (make-object color% 153 187 204) 'solid)])
     (inset (dc (lambda (dc x y)
                  (let ([b (send dc get-brush)]
                        [p (send dc get-pen)]
@@ -94,6 +96,7 @@
  (scale (t "Caner Derici") 0.8)
  (scale (t "19 Sep 2018") 0.5)
  (blank)
+ (comment "Girizgah")
  (scale (it "Advisor:") 0.5)
  (scale (it "Sam Tobin-Hochstadt") 0.5)
  )
@@ -120,6 +123,7 @@
 
 (slide
  #:title "Questions"
+ (comment "Buralar beyle bostan idi")
  (table 2 ; two columns
         (list
          (item #:bullet (colorize (tt ">") "darkred")
