@@ -296,6 +296,33 @@
  (para #:align 'center "The resulting instance is returned")
  (para #:align 'center "The result of" (code (+ c c)) "is ignored"))
 
+(slide
+ #:title "Running a Linklet"
+ (para #:align 'center "= Instantiating a linklet with a given target instance")
+ (scale (bitmap (build-path "images" "examples-target-1.png")) 1.5)
+ (para #:align 'center "Target may have variables with the same names"))
+
+(slide
+ #:title "Running a Linklet"
+ (scale (bitmap (build-path "images" "examples-target-2.png")) 1.5)
+ (para #:align 'center "Getting the imported variables"))
+
+(slide
+ #:title "Running a Linklet"
+ (scale (bitmap (build-path "images" "examples-target-3.png")) 1.5)
+ (para #:align 'center "An exported variable replaces target's variable"))
+
+(slide
+ #:title "Running a Linklet"
+ (scale (bitmap (build-path "images" "examples-target-4.png")) 1.5)
+ (para #:align 'center "Mutation happens (wherever the variable is)"))
+
+(slide
+ #:title "Running a Linklet"
+ (scale (bitmap (build-path "images" "examples-target-5.png")) 1)
+ (para #:align 'center "Linklet may use target's variable (e.g. " (code x) ")")
+ (para #:align 'center "Instead of the instance, the result of" (code (+ c x)) "is returned"))
+
 (outline 'two)
 
 (outline 'three)
