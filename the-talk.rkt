@@ -382,7 +382,7 @@
        (para (t "Linklet Model")))
  (subitem (para (t "Tested using Pycket's unit tests for linklets (~110 cases)")))
  (subitem (para "Tested " (code eval-prog=racket-linklets) "with 2000 randomly generated terms"))
- (para #:align 'right (scale (face* 'normal 'huge #f default-face-color 0 -3) 0.4)))
+ (scale (bitmap (build-path "images" "linklet-references.png")) 0.7))
 
 (current-slide-assembler
  (lambda (s v-sep c)
