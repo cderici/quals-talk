@@ -557,13 +557,34 @@ the input entry d1"))
  (scale (bitmap (build-path "images" "isabelle" "ordering-rel.png")) 0.5)
  (para (t "Is this an ") (it "ideal?") (t " (the dual of filter)")))
 
+(current-slide-assembler isabelle-default-assembler)
+
 (slide
  #:title "Does the denotational semantics form an ideal?"
- (item  #:bullet (colorize (tt ">") "darkred")
-        "Downward closed (i.e. Subsumption)")
- (item  #:bullet (colorize (tt ">") "darkred")
-        "Closed under finite union"))
+ 'alts
+ (list
+  (list 
+   (item  #:bullet (colorize (tt ">") "darkred")
+               (t "Downward closed (i.e. Subsumption)"))
+   (item  #:bullet (colorize (tt ">") "darkred")
+          (t "Closed under finite union")))
+  (list 
+   (item  #:bullet (colorize (tt ">") "darkred")
+          (t "Downward closed (i.e. Subsumption)")
+          (subitem (scale (bitmap (build-path "images" "isabelle" "subsumption.png")) 0.5)))
+   (item  #:bullet (colorize (tt ">") "darkred")
+          (t "Closed under finite union")))
+  (list 
+   (item  #:bullet (colorize (tt ">") "darkred")
+          (t "Downward closed (i.e. Subsumption)")
+          (subitem (scale (bitmap (build-path "images" "isabelle" "subsumption.png")) 0.5)))
+   (item  #:bullet (colorize (tt ">") "darkred")
+          (t "Closed under finite union")
+          (subitem (scale (bitmap (build-path "images" "isabelle" "join-is-the-least-upper.png")) 0.5))
+          (subitem (scale (bitmap (build-path "images" "isabelle" "closed-under-join-for-values.png")) 0.5))))))
+  
 
+(current-slide-assembler (isabelle-assembler-file "DeclSemAsDenotFSet.thy"))
 
 (outline 'three)
 
