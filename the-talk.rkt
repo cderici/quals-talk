@@ -242,7 +242,7 @@
 
 (slide
   #:title "Racket Core (RC) Model"
-  (scale (bitmap (build-path "images" "rc-grammar.png")) 0.8)
+  (scale (bitmap (build-path "images" "rc-grammar.png")) 0.95)
   (para #:align 'center "Racket Core Model Grammar")
   )
 
@@ -254,13 +254,13 @@
 
 (slide
   #:title "Racket Core (RC) Model"
-  (scale (bitmap (build-path "images" "rc-run-rc.png")) 0.8)
+  (scale (bitmap (build-path "images" "rc-run-rc.png")) 1)
   (para #:align 'center "Racket Core Model Evaluation Function")
   )
 
 (slide
   #:title "Linklet Model"
-  (scale (bitmap (build-path "images" "linklet-model-grammar.png")) 0.6)
+  (scale (bitmap (build-path "images" "linklet-model-grammar.png")) 0.65)
   (para #:align 'center "Linklet Model Grammar")
   )
 
@@ -434,7 +434,7 @@
        (list 
         (scale (bitmap (build-path "images" "isabelle" "jeremy-archive.png")) 0.7))
        (list 
-        (scale (bitmap (build-path "images" "isabelle" "jeremy-fig4.png")) 1))))
+        (scale (bitmap (build-path "images" "isabelle" "jeremy-fig4.png")) 1.4))))
 
 (define (isabelle-assembler-file file)
   (lambda (s v-sep c)
@@ -458,7 +458,7 @@
 
 (slide
  #:title "Extending the grammar"
- (scale (bitmap (build-path "images" "isabelle" "lc-grammar.png")) 1))
+ (scale (bitmap (build-path "images" "isabelle" "lc-grammar.png")) 1.2))
 
 (current-slide-assembler isabelle-default-assembler)
 
@@ -477,9 +477,9 @@
 
 (slide
  #:title "Extending the Small-Step Operational Semantics"
- (scale (bitmap (build-path "images" "isabelle" "isval.png")) 1)
+ (scale (bitmap (build-path "images" "isabelle" "isval.png")) 1.5)
  (para #:align 'center "A pair is a value when it's elements are values.")
- (scale (bitmap (build-path "images" "isabelle" "small-step-red-rel.png")) 1)
+ (scale (bitmap (build-path "images" "isabelle" "small-step-red-rel.png")) 1.5)
  (para #:align 'center "Extension of the standard reduction relation with pairs.")
  )
 
