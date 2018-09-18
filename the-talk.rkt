@@ -384,8 +384,44 @@
  (subitem (para "Tested " (code eval-prog=racket-linklets) "with 2000 randomly generated terms"))
  (para #:align 'right (scale (face* 'normal 'huge #f default-face-color 0 -3) 0.4)))
 
+(current-slide-assembler
+ (lambda (s v-sep c)
+   (lt-superimpose
+    fade-bg
+    (let ([c (colorize c "darkred")])
+      (if s
+          (vc-append v-sep
+                     ;; left-aligns the title:
+                     #;(ghost (scale (titlet s) 2))
+                     (inset (titlet s) 20)
+                     c)
+          c))
+    )))
 
 (outline 'two)
+
+(current-slide-assembler
+ (lambda (s v-sep c)
+   (lt-superimpose
+    (lbl-superimpose
+     fade-bg
+     (scale (bitmap (build-path "images" "isabelle.png")) 0.3))
+    (let ([c (colorize c "darkred")])
+      (if s
+          (vc-append v-sep
+                     ;; left-aligns the title:
+                     #;(ghost (scale (titlet s) 2))
+                     (inset (titlet s) 20)
+                     c)
+          c))
+      )))
+
+(slide
+ #:title "Adding Pair to the Denotational Model of CBV λ-calculus"
+ (para #:width 1000
+       (it "Extend Jeremy’s denotational model of the untyped lambda calculus with pairs.")
+       (it "Extend the proof of correspondence with the operational semantics in Isabelle")
+       (it "to handle pairs.")))
 
 (outline 'three)
 
