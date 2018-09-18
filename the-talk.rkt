@@ -400,28 +400,90 @@
 
 (outline 'two)
 
-(current-slide-assembler
- (lambda (s v-sep c)
-   (lt-superimpose
-    (lbl-superimpose
-     fade-bg
-     (scale (bitmap (build-path "images" "isabelle.png")) 0.3))
-    (let ([c (colorize c "darkred")])
-      (if s
-          (vc-append v-sep
+(define isabelle-default-assembler
+  (lambda (s v-sep c)
+    (lt-superimpose
+     (lbl-superimpose
+      fade-bg
+      (scale (bitmap (build-path "images" "isabelle.png")) 0.3))
+     (let ([c (colorize c "darkred")])
+       (if s
+           (vc-append v-sep
                      ;; left-aligns the title:
-                     #;(ghost (scale (titlet s) 2))
-                     (inset (titlet s) 20)
-                     c)
-          c))
-      )))
+                      #;(ghost (scale (titlet s) 2))
+                      (inset (titlet s) 20)
+                      c)
+           c))
+     )))
+
+(current-slide-assembler isabelle-default-assembler)
 
 (slide
  #:title "Adding Pair to the Denotational Model of CBV λ-calculus"
- (para #:width 1000
-       (it "Extend Jeremy’s denotational model of the untyped lambda calculus with pairs.")
-       (it "Extend the proof of correspondence with the operational semantics in Isabelle")
-       (it "to handle pairs.")))
+ 'alts
+ (list (list
+        (para #:width 1000
+              (it "Extend Jeremy’s denotational model of the untyped lambda calculus with pairs.")
+              (it "Extend the proof of correspondence with the operational semantics in Isabelle")
+              (it "to handle pairs."))
+        (scale (bitmap (build-path "images" "isabelle" "jeremy-paper.png")) 0.7))
+       (list 
+        (scale (bitmap (build-path "images" "isabelle" "jeremy-archive.png")) 0.7))
+       (list 
+        (scale (bitmap (build-path "images" "isabelle" "jeremy-fig4.png")) 1))))
+
+(define (isabelle-assembler-file file)
+  (lambda (s v-sep c)
+    (lt-superimpose
+     (rbl-superimpose
+      (lbl-superimpose
+       fade-bg
+       (scale (bitmap (build-path "images" "isabelle.png")) 0.3))
+      (inset (it file) 20)
+      (let ([c (colorize c "darkred")])
+        (if s
+            (vc-append v-sep
+                     ;; left-aligns the title:
+                       #;(ghost (scale (titlet s) 2))
+                       (inset (titlet s) 20)
+                       c)
+            c))
+      ))))
+
+(current-slide-assembler (isabelle-assembler-file "Lambda.thy"))
+
+(slide
+ #:title "Extending the grammar"
+ (scale (bitmap (build-path "images" "isabelle" "lc-grammar.png")) 1))
+
+(current-slide-assembler isabelle-default-assembler)
+
+(slide
+ #:title "Extending the Operational Semantics"
+ (item #:bullet (colorize (tt ">") "darkred")
+       "The soundness is proved using the big-step semantics")
+ (item #:bullet (colorize (tt ">") "darkred")
+       "The completeness is proved using the small-step semantics")
+ (blank)
+ 'next
+ (item #:bullet (colorize (tt ">") "darkred")
+       "In Isabelle proofs the big-step semantics depend on the small-step semantics"))
+
+(current-slide-assembler (isabelle-assembler-file "SmallStepLam.thy"))
+
+(slide
+ #:title "Extending the Small-Step Operational Semantics"
+ (scale (bitmap (build-path "images" "isabelle" "isval.png")) 1)
+ (para #:align 'center "A pair is a value when it's elements are values.")
+ (scale (bitmap (build-path "images" "isabelle" "small-step-red-rel.png")) 1)
+ (para #:align 'center "Extension of the standard reduction relation with pairs.")
+ )
+
+(current-slide-assembler (isabelle-assembler-file "BigStepLam.thy"))
+
+(slide
+ #:title "Extending the Big-Step Operational Semantics"
+ (t "Big"))
 
 (outline 'three)
 
