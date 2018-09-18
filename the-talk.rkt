@@ -440,6 +440,8 @@ in its body.")
           c))
     )))
 
+;Adding Pairs To The Denotational Model Of The Untyped CBV Lambda Calculus
+
 (outline 'two)
 
 (define isabelle-default-assembler
@@ -526,27 +528,58 @@ in its body.")
  (scale (bitmap (build-path "images" "isabelle" "isval.png")) 1.5)
  (para #:align 'center "A pair is a value when it's elements are values.")
  (scale (bitmap (build-path "images" "isabelle" "small-step-red-rel.png")) 1.5)
- (para #:align 'center "Extension of the standard reduction relation with pairs.")
- )
+ (para #:align 'center "Extending the standard reduction relation with pairs."))
 
 (current-slide-assembler (isabelle-assembler-file "BigStepLam.thy"))
 
 (slide
  #:title "Extending the Big-Step Operational Semantics"
- (t "Big"))
+ (scale (bitmap (build-path "images" "isabelle" "big-step-vals.png")) 0.8)
+ (para #:align 'center "Extending the big-step values.")
+ (scale (bitmap (build-path "images" "isabelle" "big-step-red-rel.png")) 0.8)
+ (para #:align 'center "Extending the big-step reduction relation with pairs."))
 
 (current-slide-assembler (isabelle-assembler-file "DeclSemAsDenotFSet.thy"))
 
 (slide
  #:title "Extending the Denotational Semantics"
- (t "Fig 16"))
+ (scale (bitmap (build-path "images" "isabelle" "new-fig4.png")) 0.5)
+ (comment "However, following in the footsteps of the prior elementary semantics, we accommodate
+self application by allowing the argument d2 to be a larger approximation than
+the input entry d1"))
 
+(slide
+ #:title "Does this semantics form a filter model?"
+ (comment "One of the questions that Jeremy's paper asks is this.")
+ (para (t "A ") (tt "filter") (t " is a set that is upward closed and closed under finite intersection."))
+ 'next
+ (para (t "But ⊑ goes the opposite way -> the question becomes,"))
+ (scale (bitmap (build-path "images" "isabelle" "ordering-rel.png")) 0.5)
+ (para (t "Is this an ") (it "ideal?") (t " (the dual of filter)")))
+
+(slide
+ #:title "Does the denotational semantics form an ideal?"
+ (item  #:bullet (colorize (tt ">") "darkred")
+        "Downward closed (i.e. Subsumption)")
+ (item  #:bullet (colorize (tt ">") "darkred")
+        "Closed under finite union"))
 
 
 (outline 'three)
 
 (outline 'end)
 
-;Adding Pairs To The Denotational Model Of The Untyped CBV Lambda Calculus
-
 ;Measuring The Performance Of The Linklet System On Pycket
+
+
+
+(current-slide-assembler isabelle-default-assembler)
+
+(slide
+ #:title "Trivial changes in Isabelle theories are omitted because..."
+ (para (t "well.. because they're trivial."))
+ (scale (bitmap (build-path "images" "aux" "isabelle-trivial.png")) 1))
+
+(slide
+ #:title "le_union1 proof - the case of pair"
+ (scale (bitmap (build-path "images" "aux" "le_union1.png")) 1))
