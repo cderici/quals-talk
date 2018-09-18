@@ -269,6 +269,32 @@
          (scale (bitmap (build-path "images" "linklet-red-relation-focus.png")) 0.6)
          (para #:align 'center "Linklet Model Standard Reduction Relation"))))
 
+(slide
+ #:title "Instantiating a Linklet"
+ (scale (bitmap (build-path "images" "examples-inst-1.png")) 1.5)
+ (para #:align 'center "Instantiating a linklet without a target creates a new instance"))
+
+(slide
+ #:title "Instantiating a Linklet"
+ (scale (bitmap (build-path "images" "examples-inst-2.png")) 1.5)
+ (para #:align 'center "Getting imported variables (as values)"))
+
+(slide
+ #:title "Instantiating a Linklet"
+ (scale (bitmap (build-path "images" "examples-inst-3.png")) 1.5)
+ (para #:align 'center "Start evaluating the body using the Racket Core Model")
+ (para #:align 'center "A new variable is created in the target."))
+
+(slide
+ #:title "Instantiating a Linklet"
+ (scale (bitmap (build-path "images" "examples-inst-4.png")) 1.5)
+ (para #:align 'center "A Linklet can modify variables (of the target too)"))
+
+(slide
+ #:title "Instantiating a Linklet"
+ (scale (bitmap (build-path "images" "examples-inst-5.png")) 1.5)
+ (para #:align 'center "The resulting instance is returned")
+ (para #:align 'center "The result of" (code (+ c c)) "is ignored"))
 
 (outline 'two)
 
