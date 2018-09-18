@@ -364,13 +364,51 @@
 
 (slide
  #:title "Testing the Models : The \"program\" Form"
- (scale (bitmap (build-path "images" "linklet-test-case-1.png")) 1)
- (para #:align 'center "The " (code (program ...)) " form in action."))
+ (comment "We needed a form to basically start the computation")
+ (code
+  (test-equal
+   (term
+    (eval-prog
+     (program (use-linklets
+               [l1 (linklet () ())]
+               [l2 (linklet ((b)) () (define-values (a) 5) (+ a b))]
+              [l3 (linklet () (b) (define-values (b) 3))])
+              (let-inst t3 (instantiate l3))
+              (let-inst t1 (instantiate l1))
+              (instantiate l2 t3 #:target t1)))) 8))
+ (para #:align 'center "The " (code (program ...)) " form in action.")
+ (comment "Therefore, we created the form program, that will define some linklets in the
+use-linklets part, and have a begin-like body that models a top-level context where we
+can define some instances using the let-inst form and “run” some linklets (i.e. instan-
+tiate with targets). Note that the body of a program may also have other Racket Core
+expressions like “(+ 1 2)”"))
 
 (slide
  #:title "Testing the Models : To Actual Racket"
- (scale (bitmap (build-path "images" "to-actual-racket.png")) 1)
- (para #:align 'center "Transforming the \"program\" into a Racket program."))
+ (code
+  (term
+   (to-actual-racket
+    (program (use-linklets
+              [l1 (linklet () ())]
+              [l2 (linklet ((b)) () (define-values (a) 5) (+ a b))]
+              [l3 (linklet () (b) (define-values (b) 3))])
+             (let-inst t3 (instantiate l3))
+             (let-inst t1 (instantiate l1))
+             (instantiate l2 t3 #:target t1)))))
+ (para #:align 'center "Transforming the \"program\" into a Racket program.")
+ (comment "We couldn’t use the Racket Core forms
+like let-values to basically define some linklets and instantiate them in the body, be-
+cause then we would need to make a linklet an expression in the Racket Core language,
+which is wrong not only from the perspective of the Racket Core, but also from the
+Linklets’ perspective, since it would also mean that a linklet could have another linklet
+in its body.")
+ (code
+  (let ((l1 (compile-linklet '(linklet () ())))
+        (l2 (compile-linklet '(linklet ((b)) () (define-values (a) 5) (+ a b))))
+        (l3 (compile-linklet '(linklet () (b) (define-values (b) 3)))))
+    (define t3 (instantiate-linklet l3 (list)))
+    (define t1 (instantiate-linklet l1 (list)))
+    (instantiate-linklet l2 (list t3) t1))))
 
 (slide
  #:title "Testing the Models : Perils of Random Testing - Corner Cases"
