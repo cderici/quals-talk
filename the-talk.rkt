@@ -553,14 +553,15 @@ the input entry d1"))
  (comment "One of the questions that Jeremy's paper asks is this.")
  (para (t "A ") (tt "filter") (t " is a set that is upward closed and closed under finite intersection."))
  'next
- (para (t "But ⊑ goes the opposite way -> the question becomes,"))
+ (para (t "But ⊑ goes the opposite way, so the question becomes,"))
  (scale (bitmap (build-path "images" "isabelle" "ordering-rel.png")) 0.5)
- (para (t "Is this an ") (it "ideal?") (t " (the dual of filter)")))
+ (para (t "Does this form an ") (it "ideal?") (t " (the dual of filter)")))
 
 (current-slide-assembler isabelle-default-assembler)
 
 (slide
  #:title "Does the denotational semantics form an ideal?"
+ (comment "This is where a couple proofs required a modification")
  'alts
  (list
   (list 
@@ -584,7 +585,52 @@ the input entry d1"))
           (subitem (scale (bitmap (build-path "images" "isabelle" "closed-under-join-for-values.png")) 0.5))))))
   
 
-(current-slide-assembler (isabelle-assembler-file "DeclSemAsDenotFSet.thy"))
+(current-slide-assembler (isabelle-assembler-file "ChangeEnv.thy"))
+
+(slide
+ #:title "Introduction & Elimination Rules for Pairs"
+ (scale (bitmap (build-path "images" "isabelle" "intro-elim.png")) 0.7))
+
+(current-slide-assembler (isabelle-assembler-file "DenotSoundFSet.thy"))
+
+(slide
+ #:title "Denotational Model is Sound wrt Operational (Big-step) Semantics"
+ (comment "No progress or preservation, they're used in the completeness.")
+ (comment "This is big-step semantics")
+ 'alts
+ (list (list
+        (scale (bitmap (build-path "images" "isabelle" "soundness-thm.png")) 0.7))
+       (list
+        (scale (bitmap (build-path "images" "isabelle" "logical-relation.png")) 0.7))))
+
+(slide
+ #:title "Denotational Model is Sound wrt Operational (Big-step) Semantics"
+ (scale (bitmap (build-path "images" "isabelle" "lemma2.png")) 0.7)
+ (scale (bitmap (build-path "images" "isabelle" "lemma3.png")) 0.7))
+
+(slide
+ #:title "Denotational Model is Sound wrt Operational (Big-step) Semantics"
+ (scale (bitmap (build-path "images" "isabelle" "lemma4.png")) 0.7))
+
+(slide
+ #:title "Denotational Model is Sound wrt Operational (Big-step) Semantics"
+ (scale (bitmap (build-path "images" "isabelle" "soundness.png")) 0.7))
+
+(current-slide-assembler (isabelle-assembler-file "DenotCompleteFSet.thy"))
+
+(slide
+ #:title "Denotational Model is Complete wrt Operational (Small-step) Semantics"
+ (t "Join operation needed to be redefined (inductively)")
+ (scale (bitmap (build-path "images" "isabelle" "join.png")) 0.7)
+ (blank)
+ (blank)
+ 'next
+ (para #:align 'center (t "For the Proposition 1 & Lemma 1, we needed the following"))
+ (scale (bitmap (build-path "images" "isabelle" "le_unions.png")) 0.7))
+
+#;(slide
+ #:title "Denotational Model is Complete wrt Operational (Small-step) Semantics"
+ )
 
 (outline 'three)
 
