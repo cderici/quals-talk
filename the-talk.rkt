@@ -625,12 +625,50 @@ the input entry d1"))
  (blank)
  (blank)
  'next
- (para #:align 'center (t "For the Proposition 1 & Lemma 1, we needed the following"))
+ (para #:align 'center (t "For the Proposition 1 (subsumption) & Lemma 1 (closed under join), we need the following"))
  (scale (bitmap (build-path "images" "isabelle" "le_unions.png")) 0.7))
 
-#;(slide
- #:title "Denotational Model is Complete wrt Operational (Small-step) Semantics"
- )
+(slide
+ #:title "Reverse Substitution Preserves Meaning"
+ 'alts
+ (list (list (t "The goal is:")
+             (scale (bitmap (build-path "images" "isabelle" "reverse1.png")) 1))
+       (list (t "Decompose the equation:")
+             (scale (bitmap (build-path "images" "isabelle" "reverse2.png")) 1)
+             (t "into")
+             (scale (bitmap (build-path "images" "isabelle" "reverse3.png")) 1))))
+
+(slide
+ #:title "Completeness"
+ 'alts
+ (list (list 
+        (scale (bitmap (build-path "images" "isabelle" "reverse-subst.png")) 0.7))
+       (list 
+        (scale (bitmap (build-path "images" "isabelle" "lemma7.png")) 0.7)
+        (scale (bitmap (build-path "images" "isabelle" "lemma8.png")) 0.7))))
+
+(slide
+ #:title "Completeness"
+ (scale (bitmap (build-path "images" "isabelle" "completeness.png")) 0.7))
+
+(slide
+ #:title "List of Files"
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "Lambda.thy : the grammar"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "SmallStepLam.thy : subst, is_val, reduce, subst_fv_aux"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "BigStepLam.thy : bval, eval, bs_val, psubst, big_small_step, bs_observe"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "ValuesFSet.thy & ValuesFSetProps.thy : val, val_le"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "DeclSemAsDenotFSet.thy : E"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "ChangeEnv.thy : intro & elim rules, change_env_le"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "DenotSoundFSet.thy : substitution, preservation, progress, good, sub_good, denot_terminates"))
+ (item  #:bullet (colorize (tt ">") "darkred")
+        (t "DenotCompleteFSet.thy : join, combine_values, le_union, verse_subst_pres_denot")))
 
 (outline 'three)
 
@@ -650,3 +688,6 @@ the input entry d1"))
 (slide
  #:title "le_union1 proof - the case of pair"
  (scale (bitmap (build-path "images" "aux" "le_union1.png")) 1))
+
+(slide
+ (scale (bitmap (build-path "images" "aux" "proof.png")) 0.9))
