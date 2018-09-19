@@ -99,9 +99,10 @@
  (scale (t "19 Sep 2018") 0.5)
  (blank)
  (comment "Girizgah")
- (scale (it "Advisor:") 0.5)
- (scale (it "Sam Tobin-Hochstadt") 0.5)
- )
+ (scale (it "Commitee:") 0.5)
+ (scale (it "Dr. Sam Tobin-Hochstadt") 0.5)
+ (scale (it "Dr. Jeremy Siek") 0.5)
+ (scale (it "Dr. Daniel Leivant") 0.5))
 
 #;(start-at-recent-slide)
 
@@ -179,8 +180,11 @@
 
  (slide
   #:title "Motivation for linklets"
-   (item #:bullet (colorize (tt ">") "darkred")
-         (t "Implementing Racket in Racket"))
+  (item #:bullet (colorize (tt ">") "darkred")
+        (t "Make Racket more portable"))
+  'next
+  (item #:bullet (colorize (tt ">") "darkred")
+        (t "Have less C code, and more Racket code in Racket"))
    'next
    (item #:bullet (colorize (tt ">") "darkred")
          (t "Racket on Chez"))
@@ -466,6 +470,11 @@ in its body.")
 
 (slide
  #:title "Adding Pairs to the Denotational Model of CBV λ-calculus"
+ (comment "A function is represented by a finite approximation of its graph")
+ (comment "we accommodate
+self application by allowing the argument d 2 to be a larger approximation than
+the input entry d 1 . To this end we define an ordering relation ⊑ on D in Figure 4.
+Thus, instead of d 1 = d 2 we require d 1 ⊑ d 2")
  'alts
  (list (list
         (para #:width 1000
