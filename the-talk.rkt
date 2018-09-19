@@ -175,7 +175,7 @@
  (slide
   #:title "What is a linklet?"
   (scale (bitmap (build-path "images" "linklet-grammar.png")) 1.2)
-  )
+  (comment "Before going into details, let's first talk about MOTIVATION for linklets"))
 
  (slide
   #:title "Motivation for linklets"
@@ -546,6 +546,8 @@ in its body.")
 (slide
  #:title "Extending the Denotational Semantics"
  (scale (bitmap (build-path "images" "isabelle" "new-fig4.png")) 0.5)
+ (comment "The reason for the ordering is SELF APPLICATION.")
+ (comment "")
  (comment "However, following in the footsteps of the prior elementary semantics, we accommodate
 self application by allowing the argument d2 to be a larger approximation than
 the input entry d1"))
@@ -782,7 +784,7 @@ the input entry d1"))
 (slide
  #:title "Issues With Investigation"
  (t "Too many traces because of the expander linklet")
- (scale (bitmap (build-path "images" "pycket" "too-many-traces.png")) 0.7))
+ (scale (bitmap (build-path "images" "pycket" "too-many-traces.png")) 0.6))
 
 (slide
  'alts
