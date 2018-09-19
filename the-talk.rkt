@@ -8,7 +8,7 @@
          pict/face
          racket/draw)
 
-(set-spotlight-style! #:size 20 #:color (make-object color% 255 0 0 0.4))
+(set-spotlight-style! #:size 20 #:color (make-object color% 255 0 0 0.6))
 
 (define slide-count 4) ; 4 outline minus the title
 
@@ -40,24 +40,26 @@
                w h 0 0)
            (- margin))))
 
-(current-slide-assembler
- (lambda (s v-sep c)
-   (lt-superimpose
-    (lbl-superimpose
-     fade-bg
-     (hc-append gap-size
-                (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
-                (scale (bitmap (build-path "images" "isabelle.png")) 0.3)
-                (scale (bitmap (build-path "images" "pycket.png")) 0.3)))
-    (let ([c (colorize c "darkred")])
-      (if s
-          (vc-append v-sep
-                     ;; left-aligns the title:
-                     (ghost (scale (titlet s) 2))
-                     (titlet s)
-                     c)
-          c))
-      )))
+(define all-three-assembler
+  (lambda (s v-sep c)
+    (lt-superimpose
+     (lbl-superimpose
+      fade-bg
+      (hc-append gap-size
+                 (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
+                 (scale (bitmap (build-path "images" "isabelle.png")) 0.3)
+                 (scale (bitmap (build-path "images" "pycket.png")) 0.3)))
+     (let ([c (colorize c "darkred")])
+       (if s
+           (vc-append v-sep
+                      ;; left-aligns the title:
+                      (ghost (scale (titlet s) 2))
+                      (titlet s)
+                      c)
+           c))
+     )))
+
+(current-slide-assembler all-three-assembler)
 
 (define-syntax slide
   (syntax-parser
@@ -463,7 +465,7 @@ in its body.")
 (current-slide-assembler isabelle-default-assembler)
 
 (slide
- #:title "Adding Pair to the Denotational Model of CBV λ-calculus"
+ #:title "Adding Pairs to the Denotational Model of CBV λ-calculus"
  'alts
  (list (list
         (para #:width 1000
@@ -564,18 +566,18 @@ the input entry d1"))
  (comment "This is where a couple proofs required a modification")
  'alts
  (list
-  (list 
+  (list
    (item  #:bullet (colorize (tt ">") "darkred")
                (t "Downward closed (i.e. Subsumption)"))
    (item  #:bullet (colorize (tt ">") "darkred")
           (t "Closed under finite union")))
-  (list 
+  (list
    (item  #:bullet (colorize (tt ">") "darkred")
           (t "Downward closed (i.e. Subsumption)")
           (subitem (scale (bitmap (build-path "images" "isabelle" "subsumption.png")) 0.5)))
    (item  #:bullet (colorize (tt ">") "darkred")
           (t "Closed under finite union")))
-  (list 
+  (list
    (item  #:bullet (colorize (tt ">") "darkred")
           (t "Downward closed (i.e. Subsumption)")
           (subitem (scale (bitmap (build-path "images" "isabelle" "subsumption.png")) 0.5)))
@@ -583,7 +585,7 @@ the input entry d1"))
           (t "Closed under finite union")
           (subitem (scale (bitmap (build-path "images" "isabelle" "join-is-the-least-upper.png")) 0.5))
           (subitem (scale (bitmap (build-path "images" "isabelle" "closed-under-join-for-values.png")) 0.5))))))
-  
+
 
 (current-slide-assembler (isabelle-assembler-file "ChangeEnv.thy"))
 
@@ -641,15 +643,19 @@ the input entry d1"))
 (slide
  #:title "Completeness"
  'alts
- (list (list 
+ (list (list
         (scale (bitmap (build-path "images" "isabelle" "reverse-subst.png")) 0.7))
-       (list 
+       (list
         (scale (bitmap (build-path "images" "isabelle" "lemma7.png")) 0.7)
         (scale (bitmap (build-path "images" "isabelle" "lemma8.png")) 0.7))))
 
 (slide
  #:title "Completeness"
  (scale (bitmap (build-path "images" "isabelle" "completeness.png")) 0.7))
+
+(define c (current-font-size))
+
+(current-font-size 20)
 
 (slide
  #:title "List of Files"
@@ -668,15 +674,209 @@ the input entry d1"))
  (item  #:bullet (colorize (tt ">") "darkred")
         (t "DenotSoundFSet.thy : substitution, preservation, progress, good, sub_good, denot_terminates"))
  (item  #:bullet (colorize (tt ">") "darkred")
-        (t "DenotCompleteFSet.thy : join, combine_values, le_union, verse_subst_pres_denot")))
+        (t "DenotCompleteFSet.thy : join, combine_values, le_union, verse_subst_pres_denot"))
+ (scale (bitmap (build-path "images" "isabelle" "isabelle-references.png")) 0.6))
+
+(current-font-size c)
+
+(current-slide-assembler
+ (lambda (s v-sep c)
+   (lt-superimpose
+    fade-bg
+    (let ([c (colorize c "darkred")])
+      (if s
+          (vc-append v-sep
+                     ;; left-aligns the title:
+                     #;(ghost (scale (titlet s) 2))
+                     (inset (titlet s) 20)
+                     c)
+          c))
+    )))
 
 (outline 'three)
 
+(define pycket-default-assembler
+  (lambda (s v-sep c)
+    (lt-superimpose
+     (lbl-superimpose
+      fade-bg
+      (scale (bitmap (build-path "images" "pycket.png")) 0.3))
+     (let ([c (colorize c "darkred")])
+       (if s
+           (vc-append v-sep
+                     ;; left-aligns the title:
+                      #;(ghost (scale (titlet s) 2))
+                      (inset (titlet s) 20)
+                      c)
+           c))
+     )))
+
+(current-slide-assembler pycket-default-assembler)
+
+(slide
+ #:title "Measuring Pycket's Performance"
+ (para #:width 1000
+       (it "Measure the performance of your changes to the Pycket JIT on the existing")
+       (it "benchmarks. For at least 3 performance differences, propose a hypothesis")
+       (it "that explains the difference.")))
+
+(slide
+ #:title "A Step Back : Old Pycket vs New Pycket"
+ (bitmap (build-path "images" "pycket-rpython.png"))
+ (t "Pycket is automagically generated using RPython framework."))
+
+(slide
+ #:title "A Step Back : Old Pycket vs New Pycket"
+ 'alts
+ (list (list (scale (bitmap (build-path "images" "old-pycket.png")) 1))
+       (list (scale (bitmap (build-path "images" "new-pycket.png")) 1))))
+
+(slide
+ #:title "New Pycket Even Has a JITted Racket REPL"
+ (scale (bitmap (build-path "images" "repl.png")) 2)
+ (t "pycket --new"))
+
+(slide
+ #:title "Pyckets & Rackets"
+ 'alts
+ (list (list
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Old Pycket only works with Racket 6.12"))
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "New Pycket cannot work with Racket 6.12, it works with current head (7.0.0.10)")))
+       (list
+        (para (t "We're going to show :"))
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Old Racket (6.12) vs New Racket (7.0.0.10)"))
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Old Pycket vs New Pycket")))))
+
+(slide
+ #:title "Experiments Setup"
+ 'alts
+ (list (list
+        (t "Experiments are based on Pycket's ICFP'15 paper:")
+        (scale (bitmap (build-path "images" "pycket-icfp-2015.png")) 0.7))
+       (list
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Larceny Cross-platform benchmarks, each in #lang racket/base."))
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Performed on IU Kars cluster."))
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Every benchmark was run 100 times uninterrupted at highest priority in a new process."))
+        (item #:bullet (colorize (tt ">") "darkred")
+              (t "Doesn't include starup (including loading racket/base)")))))
+
+(slide
+ #:title "Sanity Check"
+ (scale (bitmap (build-path "images" "pycket" "old-pycket-racket.png")) 0.7))
+
+(slide
+ #:title "Difference between Rackets"
+ (scale (bitmap (build-path "images" "pycket" "racket-racket.png")) 0.7))
+
+(slide
+ #:title "Difference between Pyckets"
+ (scale (bitmap (build-path "images" "pycket" "pycket-pycket.png")) 0.7))
+
+(slide
+ #:title "Issues With Investigation"
+ (t "Too many traces because of the expander linklet")
+ (scale (bitmap (build-path "images" "pycket" "too-many-traces.png")) 0.7))
+
+(slide
+ 'alts
+ (list
+  (list
+   (scale (bitmap (build-path "images" "pycket" "old-trace.png")) 0.7))
+  (list
+   (scale (bitmap (build-path "images" "pycket" "new-trace.png")) 0.8))
+  (list
+   (scale (bitmap (build-path "images" "pycket" "new-trace-emph.png")) 0.8))))
+
+(slide
+ #:title "Discussion"
+ (para (t "The main issue is") (code current-linklet-instance) (t " and ") (code constance))
+
+ (para (t "Recall that a linklet may use target's variable, so target is kept with ") (code current-linklet-instance) (t " in the environment"))
+
+ 'next
+
+ (item #:bullet (colorize (tt ">") "darkred")
+       (para (t "Whenever a variable is got from ") (code current-linklet-instance) (t ", JIT has to put a guard"))
+       (para (t "to check if the instance and the value received is not null")))
+
+ (item #:bullet (colorize (tt ">") "darkred")
+       (para (t "Traces pass around the values that got from the target instances,"))
+       (para (t "and every one of them needs to be checked,"))
+       (para (t "whenever a loop trace is entered.")))
+
+ (item #:bullet (colorize (tt ">") "darkred")
+       (para (t "Every environment cell contains an extra field "))
+       (para (t "(also extra operation on the creation in the trace)."))))
+
+(current-slide-assembler
+ (lambda (s v-sep c)
+   (lt-superimpose
+    fade-bg
+    (let ([c (colorize c "darkred")])
+      (if s
+          (vc-append v-sep
+                     ;; left-aligns the title:
+                     #;(ghost (scale (titlet s) 2))
+                     (inset (titlet s) 20)
+                     c)
+          c))
+    )))
+
 (outline 'end)
 
-;Measuring The Performance Of The Linklet System On Pycket
+(slide
+ #:title "Conclusion"
+ (table 2 ; two columns
+        (list
+         (item #:bullet (colorize (tt ">") "darkred")
+               (para #:width 1000
+                     (it "Model the basics of the new Racket \"linklet\" module system using PLT Redex.")
+                     (it "Use random testing to confirm that the model produces the same answers as")
+                     (it "both the existing implementation and the implementation that you have produced")
+                     (it "using the Pycket JIT.")))
+         (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
+         (item #:bullet (colorize (tt ">") "darkred")
+               (para #:width 1000
+                     (it "Extend Jeremy’s denotational model of the untyped lambda calculus with pairs.")
+                     (it "Extend the proof of correspondence with the operational semantics in Isabelle")
+                     (it "to handle pairs.")))
+         (scale (bitmap (build-path "images" "isabelle.png")) 0.3)
+         (item #:bullet (colorize (tt ">") "darkred")
+               (para #:width 1000
+                     (it "Measure the performance of your changes to the Pycket JIT on the existing")
+                     (it "benchmarks. For at least 3 performance differences, propose a hypothesis")
+                     (it "that explains the difference.")))
+         (scale (bitmap (build-path "images" "pycket.png")) 0.3))
+         (list* lc-superimpose  ; left-align first column
+                cc-superimpose) ; h-center the rest
+         cc-superimpose ; v-center all rows
+         gap-size  ; separate all columns by gap-size
+         gap-size))
 
+#;(current-slide-assembler all-three-assembler)
 
+(slide
+ #:title "Thanks!"
+ (table 2 ; two columns
+        (list
+         (para #:align 'right (it "https://github.com/cderici/linklets-redex-model"))
+         (scale (bitmap (build-path "images" "plt-logo.png")) 0.3)
+         (para #:align 'right (it "https://github.com/cderici/denotational-semantics-LC-with-pairs"))
+         (scale (bitmap (build-path "images" "isabelle.png")) 0.3)
+         (para #:align 'right (it "https://github.com/cderici/pycket-performance"))
+         (scale (bitmap (build-path "images" "pycket.png")) 0.3))
+         (list* lc-superimpose  ; left-align first column
+                cc-superimpose) ; h-center the rest
+         cc-superimpose ; v-center all rows
+         gap-size  ; separate all columns by gap-size
+         gap-size))
 
 (current-slide-assembler isabelle-default-assembler)
 
