@@ -3,7 +3,7 @@ run:
 	slideshow the-talk.rkt
 
 run-wide:
-	slideshow -M 1 --widescreen the-talk.rkt
+	slideshow --widescreen the-talk.rkt
 
 print:
 	slideshow --pdf the-talk.rkt

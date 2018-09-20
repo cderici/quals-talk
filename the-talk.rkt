@@ -110,7 +110,7 @@
 
 (current-font-size 25)
 
-(current-slide-assembler
+(define empty-assembler
  (lambda (s v-sep c)
    (lt-superimpose
     fade-bg
@@ -122,7 +122,9 @@
                      (titlet s)
                      c)
           c))
-      )))
+      ))) 
+
+(current-slide-assembler empty-assembler)
 
 (slide
  #:title "Questions"
@@ -432,19 +434,7 @@ in its body.")
  (subitem (para "Tested " (code eval-prog=racket-linklets) "with 2000 randomly generated terms"))
  (scale (bitmap (build-path "images" "linklet-references.png")) 0.7))
 
-(current-slide-assembler
- (lambda (s v-sep c)
-   (lt-superimpose
-    fade-bg
-    (let ([c (colorize c "darkred")])
-      (if s
-          (vc-append v-sep
-                     ;; left-aligns the title:
-                     #;(ghost (scale (titlet s) 2))
-                     (inset (titlet s) 20)
-                     c)
-          c))
-    )))
+(current-slide-assembler empty-assembler)
 
 ;Adding Pairs To The Denotational Model Of The Untyped CBV Lambda Calculus
 
@@ -690,19 +680,7 @@ the input entry d1"))
 
 (current-font-size c)
 
-(current-slide-assembler
- (lambda (s v-sep c)
-   (lt-superimpose
-    fade-bg
-    (let ([c (colorize c "darkred")])
-      (if s
-          (vc-append v-sep
-                     ;; left-aligns the title:
-                     #;(ghost (scale (titlet s) 2))
-                     (inset (titlet s) 20)
-                     c)
-          c))
-    )))
+(current-slide-assembler empty-assembler)
 
 (outline 'three)
 
@@ -826,19 +804,7 @@ the input entry d1"))
        (para (t "Every environment cell contains an extra field "))
        (para (t "(also extra operation on the creation in the trace)."))))
 
-(current-slide-assembler
- (lambda (s v-sep c)
-   (lt-superimpose
-    fade-bg
-    (let ([c (colorize c "darkred")])
-      (if s
-          (vc-append v-sep
-                     ;; left-aligns the title:
-                     #;(ghost (scale (titlet s) 2))
-                     (inset (titlet s) 20)
-                     c)
-          c))
-    )))
+(current-slide-assembler empty-assembler)
 
 (outline 'end)
 
@@ -870,8 +836,6 @@ the input entry d1"))
          cc-superimpose ; v-center all rows
          gap-size  ; separate all columns by gap-size
          gap-size))
-
-#;(current-slide-assembler all-three-assembler)
 
 (slide
  #:title "Thanks!"
